@@ -1,0 +1,318 @@
+module One where
+
+import Data.List
+
+--- fst, snd, null, head, tail, take, drop, max, min
+null' [] = True
+null' (x:xs) = False
+-- null true nya himpunan kosong
+-- sisanya salah
+--pembatas
+
+take' 0 (x:xs) = []
+take' a [] = []
+take' a (x:xs) = x : take' (a-1) xs
+
+-- take 2 [1,2,3,4]
+-- [1,2]
+
+--pembatas
+
+drop' 0 (x:xs) = (x:xs)
+drop' a [] = []
+drop' a (x:xs) = drop' (a-1) xs
+
+--pembatas
+
+fst' (a, b) = a
+--pembatas
+
+snd' (a, b) = b
+
+--pembatas
+
+map' a [] = []
+map' a (x:xs) = a x : map' a (xs)
+
+--pembatas
+
+filter' a [] = []
+filter' a (x:xs)
+ | a x == True = [x] ++ filter' a (xs)
+ | otherwise = filter' a (xs)
+
+--pembatas
+delete' _ [] = []
+-- delete' a [b]
+  -- |a == [b] = []
+  -- |otherwise = [b]
+delete' a (x:xs)
+  | a == x = (xs)
+  | otherwise = x : delete' a (xs)
+-- berarti x nya bener trus lu ngulang
+--pembatas
+
+deleteAll' a [] = []
+deleteAll' a (x:xs)
+  | a == x = deleteAll' a (xs)
+  | otherwise = x : deleteAll' a (xs)
+
+--pembatas
+
+-- foldl'' a b [] = b
+-- --foldl' a b [c] = a b c
+-- foldl'' a b (x:xs) = a b x : foldl'' a b (xs)
+
+foldll x = x
+--pembatas
+
+
+--pembatas
+
+zip' [a] [b] = [(a,b)]
+zip' [a] (x:xs) = [(a,x)]
+
+--pembatas
+
+zipWith' a [b] [c] = [a b c]
+zipWith' a [b] (x:xs) = [a b x]
+
+--pembatas
+
+nth' x = x
+
+--pembatas
+
+scanl' x = x
+
+--pembatas
+
+scanl1' x = x
+
+--pembatas
+
+elem' x = x
+
+--pembatas
+
+notElem' x = x
+
+--pembatas
+
+head' (x:xs) = x
+
+--pembatas
+
+length' [] = 0
+length' [a] =  1
+length' (x:xs) = 1 + length' (xs)
+
+--(1,2,3,4)
+--1 + length (2,3,4)
+--1 + 1 + length (3,4)
+--pembatas
+
+reverse' [] = []
+reverse' [0] = [0]
+reverse' [a] = [a]
+reverse' (x:xs) = reverse' (xs) ++ [x]
+--[1,2,3,4]
+-- [x terakhir] : [x terakhir] : [x terakhir]
+
+--pembatas
+
+last' (a) = a
+
+--pembatas
+
+tail' (x:xs) = xs
+
+--pembatas
+
+init' [a] = []
+init' (x:xs) = x : init' (xs)
+-- [1,2,3,4]S
+-- 1 : [2,3,4]
+-- 1 : 2 : [3,4]
+-- 1 : 2 : 3
+-- 4 gada karena xs mesti lebih dari 1
+
+
+--pembatas
+
+max' a b
+  |a >= b = a
+  |a <= b = b
+
+--pembatas
+
+min' a b
+  |a <= b = a
+  |a >= b = b
+
+--pembatas
+
+concat' x = x
+
+--pembatas
+
+intersperse' a [] = []
+intersperse' a [b] = [b]
+
+-- [2] = 2
+-- 2 = [2]
+
+--pembatas
+
+intercalate' [] [[]] = []
+intercalate' [a] [[b]] = [b]
+--pembatas
+
+and' x = x
+
+--pembatas
+
+or' x = x
+
+--pembatas
+
+zip3' [a] [b] [c] = [(a,b,c)]
+--pembatas
+
+sum' [a, 0] = a + 0
+sum' [0, b] = 0 + b
+sum' [a, b] = a + b
+
+--pembatas
+
+product' (a,b) = b
+
+--pembatas
+
+words' a = a
+--pembatas
+
+lines' x = x
+
+--pembatas
+
+unlines' x = x
+
+--pembatas
+
+unwords' x = x
+
+--pembatas
+
+takeWhile' a (x:xs)
+  | a x == True = [x] ++ takeWhile' a (xs)
+  | a x == False = []
+
+--pembatas
+
+dropWhile' a (x:xs)
+  | a x == True = (xs)
+  | a x == False = (x:xs)
+    -- kalo a x bener x hilang
+-- kalo a x salah tulis full
+--pembatas
+
+concatMap' x = x
+
+--pembatas
+
+all' x = x
+
+--pembatas
+
+any' x = x
+
+--pembatas
+
+insert' a [b] = [a,b]
+insert' a (x:xs) = a : (x:xs)
+
+
+--pembatas
+
+zipWith3' x = x
+
+--pembatas
+
+-- 1.b
+
+nub' [x] = [x]
+nub' (x:xs) = x : nub' (xs)
+
+
+--pembatas
+
+sort' [x] = [x]
+sort' (x:xs) = x : sort' (xs)
+
+--pembatas
+
+minimum' [a] = a
+minimum' (x:xs) = min' (x) (minimum' (xs))
+-- minimum (1,2,3,4) = min' (1) (minimum' (2,3,4))
+-- minimum (2,3,4) = min' 2 : min' (3,4)
+
+-- 1 : 2 : (2,3,4)
+  --pembatas
+
+maximum' [a] = a
+maximum' (x:xs) = max' (x) (maximum' (xs))
+--(a,b) = b
+--if a < b
+-- then a
+
+--pembatas
+
+inits' [] = [[]]
+inits' [a] = [[],[a]]
+inits' [a,b] = [[],[a],[a,b]]
+inits' (x:xs) = [[], [x], [x] ++ [x], x : xs]
+
+--pembatas
+
+tails' [] = [[]]
+tails' [a] = [[a],[]]
+tails' [a,b] = [[a,b],[a],[]]
+tails' (x:xs) = [x : xs, [x] ++ [x], [x], []]
+--pembatas
+
+union' [a] [b] = [a,b]
+
+--pembatas
+
+intersect' x = x
+-- [a] [b]
+--   | [a] == [b] = [b]
+--   | otherwise = []
+-- --pembatas
+
+group' [] = [[]]
+group' [a] = [[a]]
+group' [a,b] = [[a],[b]]
+group' (x:xs) = [x] : group' (xs)
+
+--pembatas
+
+-- splitAt' 0 [] = ([], [])
+-- splitAt' a [b] = ([b], [])
+-- splitAt' a (x:xs) = ()
+-- ( [x] ++ [a] == (xs) , (xs) )
+-- splitAt' c [a,b,d] = ([a,b], [d])
+
+--pembatas
+
+partition' x = x
+
+--pembatas
+
+replicate' 0 b = []
+replicate' a b = b : replicate' (a-1) b
+-- 2 4 = 1 4 0 4
+
+
+--pembatas
